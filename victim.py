@@ -1,26 +1,22 @@
-import socket                                                                                                                                                                                                                               
-import os                                                                                                                                                                                                                                   
-import subprocess                                                                                                                                                                                                                           
-import sys                                                                                                                                                                                                                                  
-
+import socket                                                                               
+import os
+import subprocess
+import sys                                                                                      
 try:
     subprocess.call(['sudo', 'systemctl', 'stop', 'firewalld'])
     print "Firewall stopped successfully."
 except subprocess.CalledProcessError as e:
     print "Error stopping firewall:", e
-                                                                                                                                                                                                                                         
-SERVER_HOST = "0.0.0.0"  # Listen on all available interfaces                                                                                                                                                                               
-SERVER_PORT = 5003                                                                                                                                                                                                                          
-BUFFER_SIZE = 1024 * 128  # 128KB max size of messages, feel free to increase                                                                                                                                                               
-SEPARATOR = "<sep>"                                                                                                                                                                                                                         
-                                                                                                                                                                                                                                            
-s = socket.socket()                                                                                                                                                                                                                         
-s.bind((SERVER_HOST, SERVER_PORT))                                                                                                                                                                                                        
-s.listen(5)                                                                                                                                                                                                                                 
-print "Listening as {}:{}".format(SERVER_HOST, SERVER_PORT)                                                                                                                                                                                 
 
+SERVER_HOST = "0.0.0.0"  # Listen on all available interfaces                           
+SERVER_PORT = 5003
+BUFFER_SIZE = 1024 * 128  # 128KB max size of messages, feel free to increase
+SEPARATOR = "<sep>"
+s = socket.socket()
+s.bind((SERVER_HOST, SERVER_PORT))
+s.listen(5)
+print "Listening as {}:{}".format(SERVER_HOST, SERVER_PORT)
 while True:
-                                                                                                                                                                                                                                            
     client_socket, client_address = s.accept()
     print "{}:{} Connected!".format(client_address[0], client_address[1])
 
