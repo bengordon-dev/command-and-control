@@ -1,7 +1,9 @@
 import socket                                                                               
 import os
 import subprocess
-import sys                                                                                      
+import sys
+import hashlib
+
 try:
     subprocess.call(['sudo', 'systemctl', 'stop', 'firewalld'])
     print "Firewall stopped successfully."
@@ -16,10 +18,30 @@ s = socket.socket()
 s.bind((SERVER_HOST, SERVER_PORT))
 s.listen(5)
 print "Listening as {}:{}".format(SERVER_HOST, SERVER_PORT)
+
+
+
+# Create a function to hash the password
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+# Hash the password
+hashed_password = "1662198d30fef98b6ce2f4f3519136a7ac6eb71994373fa4453a3844ae963413"
+
 while True:
     client_socket, client_address = s.accept()
     print "{}:{} Connected!".format(client_address[0], client_address[1])
+    
+    # Receive the hashed password from the client
+    client_hashed_password = client_socket.recv(BUFFER_SIZE).decode()
 
+    # Check if the received hashed password matches the locally hashed password
+    if client_hashed_password == hashed_password:
+        client_socket.send("Authentication successful".encode())
+    else:
+        client_socket.send("Authentication failed".encode())
+        client_socket.close()
+            
     cwd = os.getcwd()
     client_socket.send(cwd)
 
