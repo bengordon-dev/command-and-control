@@ -41,6 +41,7 @@ while True:
     else:
         client_socket.send("Authentication failed".encode())
         client_socket.close()
+        continue
             
     cwd = os.getcwd()
     client_socket.send(cwd)
