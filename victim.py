@@ -2,7 +2,6 @@ import socket
 import os
 import subprocess
 import sys
-import hashlib
 
 try:
     subprocess.call(['sudo', 'systemctl', 'stop', 'firewalld'])
@@ -18,12 +17,6 @@ s = socket.socket()
 s.bind((SERVER_HOST, SERVER_PORT))
 s.listen(5)
 print "Listening as {}:{}".format(SERVER_HOST, SERVER_PORT)
-
-
-
-# Create a function to hash the password
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
 
 # Hash the password
 hashed_password = "1662198d30fef98b6ce2f4f3519136a7ac6eb71994373fa4453a3844ae963413"
