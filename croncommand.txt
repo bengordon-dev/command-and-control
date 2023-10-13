@@ -1,1 +1,0 @@
-@reboot python victim.py
