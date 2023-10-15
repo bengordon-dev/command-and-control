@@ -11,3 +11,5 @@ On the victim machine run `tar -xzvf c2` to extract the contents, then run `./se
 
 `scp` attack.py from your computer to the attacker Kali machine if need be.
 Edit line 25 in attack.py with the IP address outputted from `ip addr` in the victim machine.
+
+Run `reboot` on the victim machine to open up the backdoor
